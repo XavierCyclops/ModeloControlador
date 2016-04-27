@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CreacionEditDlg" widgetVar="CreacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCreacionTitle}">
+            <h:form id="CreacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{creacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCreacionLabel_idcreacion}" for="idcreacion" />
+                        <p:inputText id="idcreacion" value="#{creacionController.selected.idcreacion}" title="#{bundle.EditCreacionTitle_idcreacion}" required="true" requiredMessage="#{bundle.EditCreacionRequiredMessage_idcreacion}"/>
+                        <p:outputLabel value="#{bundle.EditCreacionLabel_pago}" for="pago" />
+                        <p:inputText id="pago" value="#{creacionController.selected.pago}" title="#{bundle.EditCreacionTitle_pago}" />
+                        <p:outputLabel value="#{bundle.EditCreacionLabel_idusuario}" for="idusuario" />
+                        <p:inputText id="idusuario" value="#{creacionController.selected.idusuario}" title="#{bundle.EditCreacionTitle_idusuario}" />
+                        <p:outputLabel value="#{bundle.EditCreacionLabel_calificacion}" for="calificacion" />
+                        <p:inputText id="calificacion" value="#{creacionController.selected.calificacion}" title="#{bundle.EditCreacionTitle_calificacion}" />
+                        <p:outputLabel value="#{bundle.EditCreacionLabel_idruta}" for="idruta" />
+                        <p:selectOneMenu id="idruta" value="#{creacionController.selected.idruta}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rutaController.itemsAvailableSelectOne}"
+                                           var="idrutaItem"
+                                           itemValue="#{idrutaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{creacionController.update}" value="#{bundle.Save}" update="display,:CreacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CreacionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CreacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

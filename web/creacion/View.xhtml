@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CreacionViewDlg" widgetVar="CreacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCreacionTitle}">
+            <h:form id="CreacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{creacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCreacionLabel_idcreacion}"/>
+                        <h:outputText value="#{creacionController.selected.idcreacion}" title="#{bundle.ViewCreacionTitle_idcreacion}"/>
+                        <h:outputText value="#{bundle.ViewCreacionLabel_pago}"/>
+                        <h:outputText value="#{creacionController.selected.pago}" title="#{bundle.ViewCreacionTitle_pago}"/>
+                        <h:outputText value="#{bundle.ViewCreacionLabel_idusuario}"/>
+                        <h:outputText value="#{creacionController.selected.idusuario}" title="#{bundle.ViewCreacionTitle_idusuario}"/>
+                        <h:outputText value="#{bundle.ViewCreacionLabel_calificacion}"/>
+                        <h:outputText value="#{creacionController.selected.calificacion}" title="#{bundle.ViewCreacionTitle_calificacion}"/>
+                        <h:outputText value="#{bundle.ViewCreacionLabel_idruta}"/>
+                        <h:outputText value="#{creacionController.selected.idruta}" title="#{bundle.ViewCreacionTitle_idruta}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CreacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

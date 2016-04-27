@@ -1,0 +1,7 @@
+{
+    "elements": {
+        "p:commandButton": {},
+        "ui:include": {}
+    },
+    "attributes": {}
+}

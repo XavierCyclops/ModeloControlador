@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+
+    <h:head>
+        <title>Registrate</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="resources/css/registroStyle.css" rel="stylesheet" type="text/css" />
+        
+    </h:head>
+    <h:body>
+  
+        <h:form>
+           
+            
+            <!--Mensaje de que las contraseñas no coinciden-->
+             <p:growl id="growl" showDetail="true" sticky="true" />  
+            <p:panelGrid id="matchGrid" columns="1" styleClass="registro" >
+               
+                <h2>Registrate</h2>
+                <h:outputLabel value="Numero de Cuenta" for="idusuario" />
+                <p:inputText id="idusuario" value="#{usuarioController.selected.idusuario}" title="#{bundle.CreateUsuarioTitle_idusuario}" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idusuario}"/>
+                
+                <h:outputLabel value="Nombre" for="nombre" />
+                <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}"/>  
+                
+                <h:outputLabel value="Apellido" for="apellido" />
+                <p:inputText value="#{usuarioController.selected.apellido}" title="#{bundle.CreateUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_apellido}"/> 
+                
+                <h:outputLabel value="Correo" for="correo" />
+                <p:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.CreateUsuarioTitle_correo}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_correo}"/>
+
+                <h:outputLabel value="Contraseña" for="passwrd" />
+                <p:password id="passwrd" value="#{usuarioController.selected.passwrd}" title="#{bundle.CreateUsuarioTitle_passwrd}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_passwrd}" />
+
+                <h:outputLabel for="pwd2" value="Repite Contraseña: " />
+                <p:password id="pwd2" label="Password 2" match="passwrd" required="true" /><br/>
+
+              
+                 <p:commandButton actionListener="#{usuarioController.create}" value="Registrarse" />
+                 <p:commandButton value="Cancelar" onclick="UsuarioCreateDialog.hide()"/>
+                 
+            </p:panelGrid>
+
+        </h:form>
+    </h:body>
+</html>
