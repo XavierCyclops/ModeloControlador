@@ -1,0 +1,36 @@
+-- Database: "RideCiencias"
+
+CREATE DATABASE "RideCiencias"
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'Spanish_Mexico.1252'
+       LC_CTYPE = 'Spanish_Mexico.1252'
+       CONNECTION LIMIT = -1;
+       
+CREATE TABLE Usuario(
+idUsuario SERIAL PRIMARY KEY,
+Correo VARCHAR(50) NOT NULL,
+Nombre VARCHAR(50) NOT NULL,
+Apellido VARCHAR(50) NOT NULL,
+Passwrd INTEGER NOT NULL);
+
+CREATE TABLE Ruta(
+IDRuta INTEGER PRIMARY KEY,
+Destino VARCHAR(50) NOT NULL,
+Fecha DATE NOT NULL,
+Hora TIME NOT NULL,
+Cupo INTEGER NOT NULL,
+idUsuario Integer references Usuario(idUsuario));
+
+CREATE TABLE Creacion(
+IDCreacion INTEGER PRIMARY KEY,
+Pago VARCHAR(50),
+idUsuario INTEGER references Usuario(idUsuario),
+IDRuta INTEGER references Ruta(IDRuta),
+calificacion Integer);
+
+CREATE TABLE Viaje(
+IdRuta INTEGER REFERENCES Ruta(IDRuta),
+IdUsuario INTEGER REFERENCES Usuario(IdUsuario));
+ 
