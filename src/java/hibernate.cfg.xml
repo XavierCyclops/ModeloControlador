@@ -3,5 +3,6 @@
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.connection.driver_class">com.ibm.db2.jdbc.app.DB2Driver</property>
   </session-factory>
 </hibernate-configuration>
