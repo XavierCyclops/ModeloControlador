@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>RideCiencias</title>
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css"/>
+        <!-- Custom Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'/>
+        
+
+        <link rel="stylesheet" href="resources/css/paginaUsuarioStyle.css" type="text/css"/>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="resources/css/creative.css" type="text/css"/>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="resources/css/administrarRutaStyle.css" type="text/css"/>
+        <script src="http://maps.google.com/maps/api/js"></script>
+        <script src="js/gmap.js"></script>
+        <script src="js/primeui.min.js"></script>
+        
+        
+            
+    </h:head>
+    <body>
+        <nav id="mainNav" >
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top">RideCiencias</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="#" id="publicar">Publica Viaje</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="./editarPerfil.xhtml">Editar Perfil</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#">Administrar Rutas</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="./salir.html">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        
+        <header>
+            
+            <h:form>
+                <p:scrollPanel styleClass=" cardsContainer" mode="native">
+                   <h2 style="color: black;">TUS VIAJES</h2>
+                    <h:panelGrid columns="2" styleClass="card">       
+                        
+                        <p:gmap center="19.432608, -99.133208" zoom="10" type="ROADMAP" style="height: 180px; width: 240px;margin: 0 auto;"/>
+                        <h:panelGrid columns="1" styleClass="col2">
+                            <h:outputText style="font-weight: bold;" value="Metro C.U -> NezaYork" />
+                            <h:outputText value="12/Ene/2016" />
+                            <h:outputText value="$20" />
+                            <h:panelGrid columns="2">
+                                <p:button value="Editar"  style="font-size: 15px;margin:5px;" onclick="PF('dlg').show();"/>
+                                <p:button value="Cancelar Viaje"  style="font-size: 15px;"/>
+                            </h:panelGrid>
+                            
+                        </h:panelGrid>
+                        
+                        
+                        
+                       
+                        
+                    </h:panelGrid>
+                   
+                </p:scrollPanel>
+                
+                <h:form>            
+
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+                <p:dialog header="Login" widgetVar="dlg" resizable="false" styleClass="dialogoViaje">
+                    <h:panelGrid columns="1">
+                        
+                      
+                            <h:panelGrid columns="5">
+                                <h:outputText style="font-weight: bold;" value="Salida: " />
+                                <p:inputText required="true" id="address1" widgetVar="address"/>
+                                <h:outputText style="font-weight: bold;" value="Destino: " />
+                                <p:inputText required="true" id="address2"/>
+                                
+                                
+                                
+                                
+                                <p:commandButton value="Buscar" id="buscarBoton"/>
+                                
+                                <!-- Truco sucio -->
+                                <p:inputText required="true" id="salida" style="display: none;" />
+                                <p:inputText required="true" id="destino" style="display: none;"/>
+                                
+                            </h:panelGrid>
+                            <br />
+                            
+                            
+                            <div id="geoMap" style="height: 250px; width: 100%;"></div>
+                    <br/>
+
+                        
+                    <h:panelGrid columns="5">
+                        <h:outputText style="font-weight: bold;" value="Hora: " />
+                        <p:inputText required="true" placeholder="hh"/>
+                        <h:outputText style="font-weight: bold;" value=":" />
+                        <p:inputText required="true" placeholder="mm"/>
+                        <h:selectOneMenu  required="true">
+                            <f:selectItem itemLabel="AM" itemValue="1" />
+                            <f:selectItem itemLabel="PM" itemValue="2" />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                        
+                        <br />
+                        <h:panelGrid columns="2">
+                            <h:outputText style="font-weight: bold;" value="Asientos Disponibles: " />
+                            <p:inputText />
+                        </h:panelGrid>
+                        <br />
+                        <h:panelGrid columns="2" style="margin: 0 auto;font-size: 1.3em;">
+                            <p:commandButton value="Cancelar" style="margin-right: 40px;"/>
+                            <p:commandButton value="Publicar" />
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </p:dialog>
+            </h:form>
+            
+            <h:form>
+                <p:dialog header="Tomar viaje" widgetVar="dialogo" resizable="false" styleClass="dialogo">
+                    <p:gmap center="19.432608, -99.133208" zoom="10" type="ROADMAP" style="height: 400px; width: 600px;" styleClass="map"/>
+                    <h:panelGrid columns="2" columnClasses="boton" style="margin: 0 auto;font-size: 1.3em;">
+                            <p:commandButton value="Tamar viaje" id="tomarViaje"/>
+                            <p:commandButton value="Cancelar" onclick='dlg.hide();'/>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+                
+            </h:form>
+        </header>
+    </body>
+
+</html>
+

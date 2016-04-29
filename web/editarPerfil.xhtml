@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>RideCiencias</title>
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css"/>
+        <!-- Custom Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css" type="text/css"/>
+
+        <!-- Plugin CSS -->
+        <link rel="stylesheet" href="resources/css/animate.min.css" type="text/css"/>
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="resources/css/creative.css" type="text/css"/>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="resources/css/paginaUsuarioStyle.css" type="text/css"/>
+        <script src="js/primeui.min.js"></script>
+        <script src="js/image.js"></script>
+        
+        <style>
+            .container {
+                text-align: center;  
+            }
+            
+            .image {
+                margin: 40px 40px 40px 40px;
+            }
+            
+            .data {
+                border-bottom: 1px solid black;
+                border-top: 1px solid black;
+                border-collapse: collapse;
+                margin-bottom: 60px;
+            }
+           
+            .data tr td {
+                padding: 10px;
+                text-align: left;
+            }
+            
+            .col {
+                margin: 70px;
+            }
+            .data tr td a {
+                text-decoration: none;
+            }
+            
+            .noEditable {
+                color:#999999 ;
+            }
+            
+            .editable {
+                color: #0000EE;
+            }
+            .eliminarPerfil {
+                margin: 0 auto;
+                text-align: right; 
+                width: 90%;
+            }
+            
+            .eliminarPerfil a {
+                color: #0000EE; 
+            }
+            
+            img#perfil {
+                height: 300px;
+                width: 300px;
+            }
+        </style>
+        <script>
+            function redirection() {
+                window.location.href = "http://localhost:8080/TerminusCiencias/faces/usuarioEliminado.html";
+            }
+            $( document ).ready(function() {
+                console.log( "ready!" );
+            });
+        </script>
+    </h:head>
+    <body>
+        <nav id="mainNav" >
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="./paginaUsuario.xhtml">RideCiencias</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="#about" id="publicar" onclick="PF('dlg').show();">Publica Viaje</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#services">Editar Perfil</a>
+                        </li>
+                         <li>
+                            <a class="page-scroll" href="administrarRuta.xhtml">Administrar Rutas</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="./salir.html">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        
+        <header>
+            
+            <h:form>
+                 <h:panelGrid styleClass="container" columns="2">
+                
+               
+                    <h:panelGrid columns="1" styleClass="image">
+                       
+                        <img src="img/default_user.png" id="fotoPrincipal" style="height: 160px; width: 160px;cursor: pointer;" onclick="PF('photo').show();" />
+                        <h2>Rene GL</h2>
+                    </h:panelGrid>
+
+
+
+                    <h:panelGrid styleClass="data" columns="3" cellspacing="10">
+
+                        <h:outputText value="Nombre" styleClass="col"/> 
+                        <p:inplace styleClass="col noEditable" id="campo">
+                                <p:inputText value="ReneGL"/>
+                        </p:inplace>
+                        <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                        <h:outputText value="Nombre Usuario" styleClass="col"/> 
+                        <p:inplace  styleClass="col noEditable">
+                            <p:inputText value="rene8523"/>
+                        </p:inplace> 
+                         <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                        <h:outputText value="Correo" styleClass="col" /> 
+                        <p:inplace   styleClass="col noEditable">
+                            <p:inputText value="rene@ciencias.unam.mx"/>
+                        </p:inplace> 
+                         <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                        <h:outputText value="password" styleClass="col"/> 
+                        <p:inplace styleClass="col noEditable">
+                            <p:inputText value="******"/>
+                        </p:inplace>  
+                         <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                    </h:panelGrid>
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="1" styleClass="eliminarPerfil">
+                    <p:commandButton value="Guardar" type="button" style="margin-bottom: 5px;"/>
+                    <a href="#" onclick="PF('dialogo').show();">Eliminar Perfil</a>
+                </h:panelGrid>
+            </h:form>
+            
+            <h:form>            
+
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+                <p:dialog header="Login" widgetVar="dlg" resizable="false" styleClass="dialogo">
+                    <h:panelGrid columns="1">
+                        
+                        <h:panelGrid columns="4">
+                            <h:outputText style="font-weight: bold;" value="Salida: " />
+                            <p:inputText required="true"/>
+                            <h:outputText style="font-weight: bold;" value="Destino: " />
+                            <p:inputText required="true"/>
+                            
+                        </h:panelGrid>
+                    <br/>
+                        <p:graphicImage value="img/map.jpg" style="height: 250px; width: 400px;"/>
+                        <br />
+                        
+                    <h:panelGrid columns="5">
+                        <h:outputText style="font-weight: bold;" value="Hora: " />
+                        <p:inputText required="true" placeholder="hh"/>
+                        <h:outputText style="font-weight: bold;" value=":" />
+                        <p:inputText required="true" placeholder="mm"/>
+                        <h:selectOneMenu  required="true">
+                            <f:selectItem itemLabel="AM" itemValue="1" />
+                            <f:selectItem itemLabel="PM" itemValue="2" />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                        
+                        <br />
+                        <h:panelGrid columns="2">
+                            <h:outputText style="font-weight: bold;" value="Asientos Disponibles: " />
+                            <p:inputText />
+                        </h:panelGrid>
+                        <br />
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Cancelar" />
+                            <p:commandButton value="Publicar" />
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </p:dialog>
+            </h:form>
+            
+            <h:form>
+                <p:dialog header="Eliminar viaje" widgetVar="dialogo" resizable="false" styleClass="dialogo">
+                    <h:outputText style="font-weight: bold;" value="¿Estás seguro de eliminar tu perfil y no volver nunca jamás?" />
+                    <h:panelGrid columns="2">
+                            <p:commandButton value="Nunca jamás jamás" onclick="PF('jamas1').show();"/>
+                            <p:commandButton value="NO" />
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+            
+            <h:form>
+                <p:dialog header="Jamás jamás?" widgetVar="jamas1" resizable="false" styleClass="dialogo">
+                    <h:outputText style="font-weight: bold;" value="¿Nunca jamás jamas?" />
+                    <h:panelGrid columns="2">
+                            <p:commandButton value="nunca nunca jamás para siempre siempre" onclick="PF('jamas2').show();"/>
+                            <p:commandButton value="Cancelar" />
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+            
+            <h:form>
+                <p:dialog header="nunca nunca jamás para siempre siempre?" widgetVar="jamas2" resizable="false" styleClass="dialogo">
+                    <h:outputText style="font-weight: bold;" value="nunca nunca jamás para siempre siempre?" />
+                    <h:panelGrid columns="2">
+                            <p:commandButton value="nunca jamás nunca jamás " onclick="PF('jamas3').show();"/>
+                            <p:commandButton value="Cancelar" />
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+            
+            <h:form>
+                <p:dialog header="nunca jamas nunca jamas" widgetVar="jamas3" resizable="false" styleClass="dialogo">
+                    <h:outputText style="font-weight: bold;" value="nunca nunca nunca nunca nunca nunca nunca nunca jamás?" />
+                    <h:panelGrid columns="2">
+                            <p:commandButton value="nunca nunca jamás para siempre nunca jamás jamás jamás jamás!! " onclick="redirection();"/>
+                            <p:commandButton value="Cancelar" />
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+            
+            <!--Imagen-->
+            <p:dialog id="picture" widgetVar="photo" header="Foto de perfil" resizable="false" showEffect="clip" hideEffect="clip">
+               
+                <h:panelGrid columns="1">
+                    <img src="img/default_user.png" alt="PHOTO" id="perfil"/> 
+                    <p:outputLabel value="Cambiar foto" />
+                    <input type='file' accept="image/*" /> <br/>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Guardar" id="guardar"/>
+                        <p:commandButton value="Cancelar" />
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:dialog> 
+        </header>
+    </body>
+
+</html>

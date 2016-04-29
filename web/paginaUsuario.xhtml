@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>RideCiencias</title>
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css"/>
+        <!-- Custom Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css" type="text/css"/>
+
+        <!-- Plugin CSS -->
+        <link rel="stylesheet" href="resources/css/animate.min.css" type="text/css"/>
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="resources/css/creative.css" type="text/css"/>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="resources/css/paginaUsuarioStyle.css" type="text/css"/>
+        <script src="http://maps.google.com/maps/api/js"></script>
+        <script src="resources/js/gmap.js"></script>
+        <script src="resources/js/primeui.min.js"></script>
+        
+     <script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if(args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times:5}, 100);
+                    }
+                    else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+                
+                function muestraDialogo(e) {
+                    var map = $('.map');
+                    if (e === map)
+                        return;
+                    PF('dialogo').show();
+           
+                }
+                
+                function geocode() {
+                    //PF('geoMap').geocode(document.getElementById('adress').value);
+                    var address = jQuery("[id$='address']").val();
+                    map.zoom = 1;
+                }
+                
+                $( document ).ready(function() {
+                    $('.card').on('click', function(e) {
+                        PF('dialogo').show();
+                    });
+                    
+                    var map = new GMaps({
+                        div: '#geoMap',
+                        lat: 19.43261,
+                        lng: -99.13321,
+                        zoom: 11
+                      });
+                      
+                   $("[id$='buscarBoton']").click( function(e) {
+                        //alert('Clicked');
+                        var salida = jQuery("[id$='address1']").val();
+                        var destino = jQuery("[id$='address2']").val();
+                        var destinoCoordenadas = "";
+                        var salidaCoordenadas = "";
+                        
+                        map.removeMarkers();
+                        
+                        GMaps.geocode({
+                            address: salida,
+                            callback: function(results, status) {
+                              if (status == 'OK') {
+                                var latlng = results[0].geometry.location;
+                                //map.setCenter(latlng.lat(), latlng.lng());
+                                map.addMarker({
+                                  lat: latlng.lat(),
+                                  lng: latlng.lng()
+                                });
+                                
+                                destinoCoordenadas = latlng.lat() + ", " + latlng.lng();
+                                $("[id$='destino']").val(destinoCoordenadas);
+                                //alert($("[id$='address1']").val());
+                              }
+                            }
+                          });
+                          
+                          GMaps.geocode({
+                            address: destino,
+                            callback: function(results, status) {
+                              if (status == 'OK') {
+                                var latlng = results[0].geometry.location;
+                                map.setCenter(latlng.lat(), latlng.lng());
+                                map.addMarker({
+                                  lat: latlng.lat(),
+                                  lng: latlng.lng()
+                                });
+                                
+                                salidaCoordenadas = " " + latlng.lat() + ", " + latlng.lng();
+                                $("[id$='salida']").val(salidaCoordenadas);
+                              }
+                            }
+                          });
+                        
+                        //alert($("[id$='salida']").val());
+     
+                        //map.setZoom(1);
+                        map.fitBounds(bounds);
+                        google.maps.event.trigger(map, 'resize');
+                    });
+                    
+                    $("[id$='tomarViaje']").on('click' , function(e) {
+                        PF('dialogo').hide("slow");
+                        $('#viajeProximo').slideDown( "slow", function() {
+                            var r = confirm('¿Estás seguro quieres tomar este viaje?')
+                            if (r == false)
+                                $(this).slideUp("slow");
+                          });
+                    });
+                  });
+                  
+                  
+            </script>   
+    </h:head>
+    <body>
+        <nav id="mainNav" >
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top">RideCiencias</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="#about" id="publicar" onclick="PF('dlg').show();"> Publica Viaje</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="editarPerfil.xhtml"> Editar Perfil </a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="administrarRuta.xhtml"> Administrar Rutas </a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#portfolio"> Salir </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        
+        <!--Aqui empieza lo mio, lo de atras no tocar-->
+        <header>
+            
+            <p:panel id="viajeProximo">
+                <h:outputText value="Faltan 2 hrs con 30min para tu viaje" />
+                <a href="#" onclick="PF('dialogo').show()">Ver viaje</a>
+            </p:panel>
+            <h:form>
+               
+                <p:scrollPanel styleClass="cardsContainer" mode="native" >
+                        <h2 style="">Proximos Viajes</h2>
+                        <h:panelGrid columns="4" styleClass="card">       
+
+                        <h:panelGrid columns="1" styleClass="col1">
+                                <p:graphicImage value="resources/img/default_user.png" style="height: 160px; width: 140px;"/>
+                                <h:outputText value="Rene GL." />
+                                <p:rating value="5" readonly="true" styleClass="center-rating"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="1" styleClass="col2">
+                            <h:outputText style="font-weight: bold;" value="13:00, quedan 2hrs" />
+                                <h:outputText value="Metro C.U - Neza" />
+                                <h:outputText value="2 asientos disponibles" />
+                        </h:panelGrid>
+                        
+                        <p:gmap center="19.432608, -99.133208" zoom="10" type="ROADMAP" style="height: 160px; width: 220px;" styleClass="map"/>
+                        <h:outputText value="$20 p/asiento" styleClass="col3"/> 
+
+                    </h:panelGrid>
+                    
+                         
+                         
+                         
+                </p:scrollPanel>
+                
+            </h:form>
+            
+            <h:form>            
+
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+                <p:dialog header="Login" widgetVar="dlg" resizable="false" styleClass="dialogoViaje">
+                    <h:panelGrid columns="1">
+                        
+                      
+                            <h:panelGrid columns="5">
+                                <h:outputText style="font-weight: bold;" value="Salida: " />
+                                <p:inputText required="true" id="address1" widgetVar="address"/>
+                                <h:outputText style="font-weight: bold;" value="Destino: " />
+                                <p:inputText required="true" id="address2"/>
+                                
+                                
+                                
+                                
+                                <p:commandButton value="Buscar" id="buscarBoton"/>
+                                
+                                <!-- Truco sucio -->
+                                <p:inputText required="true" id="salida" style="display: none;" />
+                                <p:inputText required="true" id="destino" style="display: none;" value="#{rutaController.selected.destino}" title="#{bundle.CreateRutaTitle_destino}" requiredMessage="#{bundle.CreateRutaRequiredMessage_destino}"/>
+                                
+                            </h:panelGrid>
+                            <br />
+                            
+                            
+                            <div id="geoMap" style="height: 250px; width: 100%;"></div>
+                    <br/>
+                        
+                   
+                    
+                    
+                        
+                    <h:panelGrid columns="5">
+                        <h:outputText style="font-weight: bold;" value="Hora: " />
+                        <p:inputText required="true" placeholder="hh"/>
+                        <h:outputText style="font-weight: bold;" value=":" />
+                        <p:inputText required="true" placeholder="mm"/>
+                        <h:selectOneMenu  required="true">
+                            <f:selectItem itemLabel="AM" itemValue="1" />
+                            <f:selectItem itemLabel="PM" itemValue="2" />
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{rutaController.selected.fecha}" title="#{bundle.EditRutaTitle_fecha}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{rutaController.selected.hora}" title="#{bundle.EditRutaTitle_hora}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_hora}" showOn="button"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                        
+                        <br />
+                        <h:panelGrid columns="2">
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_cupo}" for="cupo" />
+                        <p:inputText id="cupo" value="#{rutaController.selected.cupo}" title="#{bundle.CreateRutaTitle_cupo}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_cupo}"/>
+                        <p:outputLabel value="Numero de viaje" for="idruta" />
+                        <p:inputText id="idruta" value="#{rutaController.selected.idruta}" title="#{bundle.CreateRutaTitle_idruta}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_idruta}"/>
+                        <p:outputLabel value="Numero de Cuenta" for="idusuario" />
+                        <p:inputText id="idusuario" value="#{rutaController.selected.idusuario}" title="#{bundle.CreateRutaTitle_idusuario}" />
+                        </h:panelGrid>
+                        <br />
+                        <h:panelGrid columns="2" style="margin: 0 auto;font-size: 1.3em;">
+                            <p:commandButton value="Cancelar" onclick='dlg.hide();' style="margin-right: 40px;"/>
+                             <p:commandButton actionListener="#{rutaController.create}" value="Guardar" />
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </p:dialog>
+            </h:form>
+            
+            <h:form>
+                <p:dialog header="Tomar viaje" widgetVar="dialogo" resizable="false" styleClass="dialogo">
+                    <p:gmap center="19.432608, -99.133208" zoom="10" type="ROADMAP" style="height: 400px; width: 600px;" styleClass="map"/>
+                    <h:panelGrid columns="2" columnClasses="boton" style="margin: 0 auto;font-size: 1.3em;">
+                            <p:commandButton value="Tamar viaje" id="tomarViaje"/>
+                            <p:commandButton value="Cancelar" onclick='dlg.hide();'/>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+           
+        </header>
+    </body>
+
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RutaCreateDlg" widgetVar="RutaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRutaTitle}">
+            <h:form id="RutaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rutaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_idruta}" for="idruta" />
+                        <p:inputText id="idruta" value="#{rutaController.selected.idruta}" title="#{bundle.CreateRutaTitle_idruta}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_idruta}"/>
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_destino}" for="destino" />
+                        <p:inputText id="destino" value="#{rutaController.selected.destino}" title="#{bundle.CreateRutaTitle_destino}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_destino}"/>
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{rutaController.selected.fecha}" title="#{bundle.EditRutaTitle_fecha}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{rutaController.selected.hora}" title="#{bundle.EditRutaTitle_hora}" required="true" requiredMessage="#{bundle.EditRutaRequiredMessage_hora}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_cupo}" for="cupo" />
+                        <p:inputText id="cupo" value="#{rutaController.selected.cupo}" title="#{bundle.CreateRutaTitle_cupo}" required="true" requiredMessage="#{bundle.CreateRutaRequiredMessage_cupo}"/>
+                        <p:outputLabel value="#{bundle.CreateRutaLabel_idusuario}" for="idusuario" />
+                        <p:inputText id="idusuario" value="#{rutaController.selected.idusuario}" title="#{bundle.CreateRutaTitle_idusuario}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rutaController.create}" value="#{bundle.Save}" update="display,:RutaListForm:datalist,:growl" oncomplete="handleSubmit(args,'RutaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RutaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
